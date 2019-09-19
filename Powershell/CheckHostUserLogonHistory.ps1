@@ -1,4 +1,6 @@
-﻿function get-logonhistory{
+## Checks Event Logs for user logon events and opens a window with the results. Useful if you need to check logon history of a particular PC. ##
+
+function get-logonhistory{
 Param (
  [string]$Computer = (Read-Host Remote computer name),
  [int]$Days = 10
