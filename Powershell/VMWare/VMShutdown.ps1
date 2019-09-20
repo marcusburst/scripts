@@ -1,5 +1,9 @@
 ﻿## Imports a list of VM's from a .txt file and shuts them down ##
 
+$vCenter = 'vCenterURL'
+
+Connect-VIServer $vCenter
+
 foreach($vmName in (Get-Content -Path .\vmnames.txt)){
 
     $vm = Get-VM -Name $vmName
@@ -17,3 +21,5 @@ foreach($vmName in (Get-Content -Path .\vmnames.txt)){
     }
 
 }
+
+Disconnect-VIServer -Confirm:$false
