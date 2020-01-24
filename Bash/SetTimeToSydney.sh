@@ -2,7 +2,7 @@
 
 timezonetocheck=$(/usr/sbin/systemsetup -gettimezone)
 
-# Don't run if the user has already set their time zone to Tokyo, Seoul or Hong Kon #
+# Don't run if the user has already set their time zone to Tokyo, Seoul or Hong Kong #
 if [[ $timezonetocheck = *"Tokyo"* ]];then
 		echo "Time is set to Japan..ignoring"
 		exit
