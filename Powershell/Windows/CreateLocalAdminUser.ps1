@@ -1,4 +1,4 @@
-$Account = 'apacsupport'
+$Account = 'support'
 $Password = Read-Host "Enter Password" -AsSecureString
 $Administrators = 'Administrators'
 $PCList = Get-Content -Path 'C:\temp\InfraServers.txt'
