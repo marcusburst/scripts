@@ -12,4 +12,4 @@ foreach ($printersetting in $printersettingspath) {
     Remove-ItemProperty -Path $PrinterSettingsPath -Name "*MYPRINTERNAME*" -ErrorAction SilentlyContinue
 }
 
-Get-ChildItem -Path $PrinterConnectionPath | ForEach-Object {if ($_ -like "*MYPRINTERNAMEG*"){Remove-Item -Path "Registry::$_" -confirm:$false}}
+Get-ChildItem -Path $PrinterConnectionPath | ForEach-Object {if ($_ -like "*MYPRINTERNAME*"){Remove-Item -Path "Registry::$_" -confirm:$false}}
