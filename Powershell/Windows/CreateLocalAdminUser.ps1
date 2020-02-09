@@ -1,7 +1,7 @@
-$Account = 'apacsupport'
+$Account = 'mylocaladmin'
 $Administrators = 'Administrators'
 $Password = Read-Host "Enter Password" -AsSecureString
-$ComputerNames = Get-Content 'C:\Windows\Temp\InfraServers.txt'
+$ComputerNames = Get-Content 'C:\Windows\Temp\MyListOfServers.txt'
 
 Invoke-Command -ComputerName $ComputerNames -ScriptBlock {
 
@@ -32,7 +32,7 @@ else{
 
     if(-not ($UserExistsCIM)){
 
-    net user /add $Using:Account 1mc$ecret
+    net user /add $Using:Account MyPlainTextPassword
     Write-Host "Created user $Using:Account on $env:COMPUTERNAME"
     net localgroup $Using:Administrators $Using:Account /add
     Write-Host "Added User $Using:Account to $Using:Administrators group on $env:COMPUTERNAME"
