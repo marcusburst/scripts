@@ -1,25 +1,48 @@
-$Account = 'support'
-$Password = Read-Host "Enter Password" -AsSecureString
+$Account = 'apacsupport'
 $Administrators = 'Administrators'
-$PCList = Get-Content -Path 'C:\temp\InfraServers.txt'
+$Password = Read-Host "Enter Password" -AsSecureString
+$ComputerNames = Get-Content 'C:\Windows\Temp\InfraServers.txt'
 
-foreach($PC in $PCList){
+Invoke-Command -ComputerName $ComputerNames -ScriptBlock {
 
-$UserExists = [bool](Get-LocalUser -Name $Account -ErrorAction SilentlyContinue)
+if($PSVersionTable.PSVersion.Major -ge 5 -and $PSVersionTable.PSVersion.Minor -ge 1){
+
+$UserExists = [bool](Get-LocalUser -Name $Using:Account)
 
 if(-not ($UserExists)){
 
-    New-LocalUser -Name $Account -Password $Password -PasswordNeverExpires
-    Write-Host "Created user $Account"
-    Add-LocalGroupMember -Group $Administrators -Member $Account
-    Write-Host "Added User $Account to $Administrators group"
+    New-LocalUser -Name $Using:Account -Password $Using:Password -PasswordNeverExpires
+    Write-Host "Created user $Using:Account on $env:COMPUTERNAME"
+    Add-LocalGroupMember -Group $Using:Administrators -Member $Using:Account
+    Write-Host "Added User $Using:Account to $Using:Administrators group on $env:COMPUTERNAME"
 
 }
 
 else{
 
-    Write-Host "$Account already exists"
+    Write-Host "$Using:Account already exists on $env:COMPUTERNAME"
+    exit
+}
+}
+
+else{
+
+    $ComputerName = $env:ComputerName
+    $UserExistsCIM = [bool](Get-WMIObject -ClassName Win32_UserAccount -Computername $ComputerName | Where-Object Name -eq '$Using:Account')
+
+    if(-not ($UserExistsCIM)){
+
+    net user /add $Using:Account 1mc$ecret
+    Write-Host "Created user $Using:Account on $env:COMPUTERNAME"
+    net localgroup $Using:Administrators $Using:Account /add
+    Write-Host "Added User $Using:Account to $Using:Administrators group on $env:COMPUTERNAME"
+
+    }
+
+else{
+    Write-Host "$Using:Account already existson $env:COMPUTERNAME"
     exit
 
+}
 }
 }
