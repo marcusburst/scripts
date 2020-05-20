@@ -11,7 +11,7 @@ $AWTenantCode = 'tenantcodestring'
 # Get all of the Airwatch Assets #
 $Params = @{
     Uri         = 'myairwatchurl'
-    Headers     = @{"Authorization" = $Auth; "aw-tenant-code" = $AWTenantCode}
+    Headers     = @{"Authorization" = $Auth; "aw-tenant-code" = $AWTenantCode }
     Method      = 'GET'
     ContentType = 'application/json'
 }
@@ -24,7 +24,7 @@ $AirwatchUserNames = $GetAssets.Devices.UserName
 
 # Get a list of AD users that are disabled #
 Import-Module ActiveDirectory
-$DisabledUsers = Get-ADUser -Filter * -SearchBase "OU=DisabledUsers,OU=Users,OU=Group,DC=My,DC=Domain,DC=FQDN" | Where-Object {$_.Enabled -eq $false} | Select-Object SAMAccountName
+$DisabledUsers = Get-ADUser -Filter * -SearchBase "OU=DisabledUsers,OU=Users,OU=Group,DC=My,DC=Domain,DC=FQDN" | Where-Object { $_.Enabled -eq $false } | Select-Object SAMAccountName
 
 # Compare the users #
 Compare-Object -ReferenceObject $AirwatchUserNames -DifferenceObject $DisabledUsers
