@@ -4,4 +4,4 @@
 $Source = 'source'
 $Destination = 'destination'
 
-@(Get-ChildItem $Source -Filter *.bak | Sort-Object LastWriteTime -Descending)[0] | ForEach-Object { Copy-Item -Path $_.FullName -Destination $Destination -Force} 
+@(Get-ChildItem $Source -Filter *.bak | Sort-Object LastWriteTime -Descending)[0] | ForEach-Object { Copy-Item -Path $_.FullName -Destination $Destination -Force } 
