@@ -1,4 +1,4 @@
-﻿$Users = Get-ChildItem 'C:\Users' | Where-Object { $_.Name -notlike "Administrator" -and $_.Name -ne "Public" -and $_.Name -ne "Default" -and $_.Name -ne "apacsupport" -and $_.Name -ne "apacdeploy" }
+﻿$Users = Get-ChildItem 'C:\Users' | Where-Object { $_.Name -notlike "Administrator" -and $_.Name -ne "Public" -and $_.Name -ne "Default"}
 
 Foreach ($User in $Users) {
 
