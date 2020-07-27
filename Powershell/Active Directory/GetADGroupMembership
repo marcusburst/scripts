@@ -1,0 +1,3 @@
+# Gets a list of AD group members in the specified group and displays their full name #
+
+$GroupMembers = Get-ADGroupMember -Identity 'MyGroupHere'; $GroupMembers.name
