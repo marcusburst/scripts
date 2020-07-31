@@ -1,0 +1,1 @@
+curl -v -X GET -H "Accept: application/json" -H "Content-Type: application/json" -H "Authorization: SSWS mytoken" "https://myoktadomain/api/v1/groups/specificgroupid"
