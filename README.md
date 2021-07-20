@@ -7,4 +7,8 @@ Feedback is welcome!
 
 --
 
-https://au.linkedin.com/in/marcus-burst
+Contact me on:
+
+[Linkedin](https://au.linkedin.com/in/marcus-burst)
+[Website](https://marcusburst.website/)
+
